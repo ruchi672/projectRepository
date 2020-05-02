@@ -50,3 +50,4 @@ stage('Archive-Artifacts') {
         server.upload(uploadSpec)
         
         }
+}
