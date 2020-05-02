@@ -39,4 +39,30 @@ node {
         server.upload(uploadSpec)
         
         }
+        
+        
+  stage('Download package from JFrog') {
+            def server= Artifactory.server 'artifactory'
+            def downloadSpec = """{
+            "files": [
+            {
+                "pattern": "capstoneproject/capstoneproject-0.0.1-SNAPSHOT.war",
+                "target": "./capstoneproject.war"
+            }
+            ]
+            }"""
+        server.download(downloadSpec)
+    }
+       
+ stage('Docker-Stage-Deployment') {
+   sh label: '', script: 'docker-compose up -d --build'
+  }
+  
+  stage('Pushing DockerImage to DockerHub') {
+	  docker.withRegistry('', 'ruchi-dockerhub' ) {
+		    sh label: '', script: 'docker push ruchi672/capstoneproject:$BUILD_NUMBER'
+		  }
+   
+  }
+        
 }
