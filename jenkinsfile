@@ -22,7 +22,8 @@ node {
         sh "mvn sonar:sonar"
     }
   }
-  /*
+ 
+
   stage('Sonar - Quality Gate') {
   	timeout(time: 1, unit: 'HOURS') {
                 waitForQualityGate abortPipeline: true
@@ -32,4 +33,20 @@ node {
   stage('Maven-Package') {
     sh label: '', script: 'mvn package'
   }
-}
+
+
+stage('Archive-Artifacts') {
+   archiveArtifacts 'target/*.war'
+  }
+   
+
+   stage('Jfrog Artifacory Upload') {
+        def server= Artifactory.server 'Artifactory'
+                    def uploadSpec= """{
+                        "files": [{
+                        "pattern": "target/*.war",
+                        "target": "capstoneproject"}]
+                    }"""
+        server.upload(uploadSpec)
+        
+        }
