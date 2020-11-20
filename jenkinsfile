@@ -53,16 +53,5 @@ node {
             }"""
         server.download(downloadSpec)
     }
-       
- stage('Docker-Stage-Deployment') {
-   sh label: '', script: 'docker-compose up -d --build'
-  }
-  
-  stage('Pushing DockerImage to DockerHub') {
-	  docker.withRegistry('', 'ruchi-dockerhub' ) {
-		    sh label: '', script: 'docker push ruchi672/capstoneproject:$BUILD_NUMBER'
-		  }
-   
-  }
         
 }
