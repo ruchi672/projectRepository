@@ -23,7 +23,9 @@ node {
     }
   }
    stage("Quality gate") {
+        steps {
                 waitForQualityGate(webhookSecretId: 'mindtree')   
+              }
         }
   
   stage('Maven-Package') {
