@@ -30,6 +30,8 @@ node {
                 waitForQualityGate abortPipeline: true
             } 
             }
+            }
+            }
             
   
   stage('Maven-Package') {
