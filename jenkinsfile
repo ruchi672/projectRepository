@@ -25,7 +25,7 @@ node {
  stage('S5 - Quality Gate') {
             script{
            waitUntil(initialRecurrencePeriod: 5000, quiet: true) {
-                waitForQualityGate abortPipeline: true
+                waitForQualityGate abortPipeline: OK
          }
             }
             }
