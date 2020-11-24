@@ -23,7 +23,7 @@ node {
     }
   }
    stage("Quality gate") {
-        steps {
+        step {
                 waitForQualityGate(webhookSecretId: 'mindtree')   
               }
         }
