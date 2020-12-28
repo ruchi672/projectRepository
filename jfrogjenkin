@@ -1,0 +1,40 @@
+node {
+  
+  stage('GIT CheckOut') {
+    git 'https://github.com/ruchi672/projectRepository.git'
+  }
+
+  stage('Maven-Clean') {
+    sh label: '', script: 'mvn clean'
+  }
+
+  stage('Maven-Compile') {
+    sh label: '', script: 'mvn compile'
+  }
+  
+  stage('Maven-Test') {
+    sh label: '', script: 'mvn test'
+  }           
+  
+  stage('Maven-Package') {
+    sh label: '', script: 'mvn package'
+  }
+
+   
+
+   stage('Jfrog Artifacory Upload') {
+        def server= Artifactory.server 'artifactory'
+                    def uploadSpec= """{
+                        "files": [{
+                        "pattern": "target/*.war",
+                        "target": "capstoneproject"}]
+                    }"""
+        server.upload(uploadSpec)
+        
+        }
+        
+ }
+        
+        
+ 
+        
