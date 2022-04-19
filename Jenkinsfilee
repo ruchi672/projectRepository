@@ -13,7 +13,7 @@ pipeline {
 	stage('Sonar Analysis') {
             steps {
                 withSonarQubeEnv('sonar') {
-               sh 'mvn sonar:sonar -Dsonar.projectKey=sonar'
+               sh 'mvn -X verify sonar:sonar -Dsonar.projectKey=sonar'
              }
             }
         }
