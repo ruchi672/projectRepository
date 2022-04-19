@@ -10,16 +10,10 @@ pipeline {
             }
         }
 	
-	stage('Maven-Clean') {
-            steps {
-                sh 'mvn clean'
-            }
-        }
-	
 	stage('Sonar Analysis') {
             steps {
                 withSonarQubeEnv('sonar') {
-               sh 'mvn sonar:sonar'
+               sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=sonar'
              }
             }
         }
