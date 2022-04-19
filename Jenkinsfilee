@@ -13,7 +13,7 @@ pipeline {
 	stage('Sonar Analysis') {
             steps {
                 withSonarQubeEnv('sonar') {
-               sh 'mvn clean verify sonar:sonar'
+               sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=sonar -Dsonar.host.url=http://34.100.252.55:9000 -Dsonar.login=cd183e4bbb2684a015b7deff1ab5d6b918bece39'
              }
             }
         }
