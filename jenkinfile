@@ -15,6 +15,20 @@ node {
   stage('Maven-Test') {
     sh label: '', script: 'mvn test'
   }
+  
+  
+ stage('Sonar Analysis') {
+   withSonarQubeEnv('sonar') {
+        sh "mvn sonar:sonar"
+    }
+  }
+   stage("Quality Gate"){
+              def qg = waitForQualityGate()
+              if (qg.status != 'OK') {
+                  error "Pipeline aborted due to quality gate failure: ${qg.status}"
+              }        
+          
+      }
   stage('Maven-Package') {
     sh label: '', script: 'mvn package'
   }      
