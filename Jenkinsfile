@@ -6,13 +6,13 @@ pipeline {
     stages {
         stage('Example') {
             steps {
-                sh 'git 'https://github.com/ruchi672/projectRepository.git'
+                sh 'git clone https://github.com/ruchi672/projectRepository.git'
             }
         }
 	
 	stage('Maven-Clean') {
             steps {
-                sh 'mvn clean'
+                sh 'mvn clean install'
             }
         }
     }
