@@ -1,18 +1,30 @@
 pipeline {
     agent any
-    tools {
-        maven 'maven-3.6.3' 
-    }
     stages {
-        stage('Example') {
+        stage('Git Clone') {
             steps {
-                sh 'git 'https://github.com/ruchi672/projectRepository.git'
+               sh 'git clone https://github.com/ruchi672/projectRepository.git'
             }
         }
 	
 	stage('Maven-Clean') {
             steps {
                 sh 'mvn clean'
+            }
+        }
+	stage('Maven-Compile') {
+            steps {
+                sh 'mvn compile'
+            }
+        }
+	stage('Maven-Compile') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+	stage('Maven-Package') {
+            steps {
+                sh 'mvn package'
             }
         }
     }
