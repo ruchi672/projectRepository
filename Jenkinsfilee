@@ -1,13 +1,21 @@
 pipeline {
     agent any
     stages {
-        stage('Example') {
+        stage('Git Clone') {
             steps {
                 sh 'git clone https://github.com/ruchi672/projectRepository.git'
             }
         }
 	
 	stage('Sonar Analysis') {
+            steps {
+                withSonarQubeEnv('sonar') {
+                     sh 'mvn clean package sonar:sonar'
+                     }
+                  }
+         }
+	
+	stage('Retrieve Quality Gate') {
             steps {
                 withSonarQubeEnv('sonar') {
                     sh "${scannerHome}/bin/sonar-scanner"
