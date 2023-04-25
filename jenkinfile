@@ -9,7 +9,7 @@ pipeline {
 	
 	stage('Maven-Clean') {
             steps {
-                sh 'mvn clea'
+                sh 'mvn clean'
             }
         }
 	stage('Maven-Compile') {
