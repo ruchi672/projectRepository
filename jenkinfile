@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('Git Clone process') {
+        stage('Git Clone') {
             steps {
                sh 'git clone https://github.com/ruchi672/projectRepository.git'
             }
@@ -15,6 +15,11 @@ pipeline {
 	stage('Maven-Compile') {
             steps {
                 sh 'mvn compile'
+            }
+        }
+	stage('Maven-Compile') {
+            steps {
+                sh 'mvn test'
             }
         }
     }
