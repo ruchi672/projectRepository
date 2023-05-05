@@ -12,7 +12,7 @@ pipeline {
                 sh 'mvn clean'
             }
         }
-	stage('Maven-Compile-new') {
+	stage('Maven-Compile') {
             steps {
                 sh 'mvn compile'
             }
